@@ -45,8 +45,8 @@ public class MyVpnService extends VpnService implements Runnable {
         Builder builder = new Builder();
         // Configure the VPN parameters
         builder.setSession(getString(R.string.app_name))
-               .addAddress("10.0.0.2", 24) // Assign an IP address to the virtual interface
-               .addDnsServer("8.8.8.8")    // Set a DNS server
+               .addAddress("31.97.162.141", 24) // Assign an IP address to the virtual interface
+               .addDnsServer("1.1.1.1")    // Set a DNS server
                .addRoute("0.0.0.0", 0)     // Route all traffic through the VPN
                .setMtu(1500);
 
