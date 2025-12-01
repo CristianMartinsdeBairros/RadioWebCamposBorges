@@ -8,7 +8,8 @@ import android.os.ParcelFileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import android.os.Build;
+import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -36,9 +37,13 @@ public class MainActivity extends Activity implements OnClickListener {
 
         Intent prepareIntent = VpnService.prepare(this);
     if (prepareIntent != null) {
-    startActivityForResult(prepareIntent, VPN_PERMISSION_REQUEST_CODE);
+    startService(new Intent(MyActivity.this, MyVpnService.class));
     } else {
-    onActivityResult(VPN_PERMISSION_REQUEST_CODE, RESULT_OK, null);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+    finishAffinity();
+    } else {
+    finish();
+    }
     }
         
         initializeUIElements();
