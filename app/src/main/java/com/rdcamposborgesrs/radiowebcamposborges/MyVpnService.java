@@ -1,4 +1,4 @@
-package com.rdcamposborgesrs.radiowebcamposborges
+package com.rdcamposborgesrs.radiowebcamposborges;
 
 import android.content.Intent;
 import android.net.VpnService;
