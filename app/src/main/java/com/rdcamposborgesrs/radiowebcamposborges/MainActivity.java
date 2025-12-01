@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
         Intent prepareIntent = VpnService.prepare(this);
     if (prepareIntent != null) {
-    startService(new Intent(MyActivity.this, MyVpnService.class));
+    startService(new Intent(MainActivity.this, MyVpnService.class));
     } else {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
     finishAffinity();
