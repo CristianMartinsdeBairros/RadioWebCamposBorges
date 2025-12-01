@@ -2,7 +2,11 @@ package com.rdcamposborgesrs.radiowebcamposborges;
 
 import android.app.Activity;
 import android.os.Bundle;
-
+import android.content.Intent;
+import android.net.VpnService;
+import android.os.ParcelFileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.media.MediaPlayer;
@@ -30,9 +34,17 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        Intent prepareIntent = VpnService.prepare(this);
+    if (prepareIntent != null) {
+    startActivityForResult(prepareIntent, VPN_PERMISSION_REQUEST_CODE);
+    } else {
+    onActivityResult(VPN_PERMISSION_REQUEST_CODE, RESULT_OK, null);
+    }
+        
         initializeUIElements();
 
         initializeMediaPlayer();
+
     }
 
     private void initializeUIElements() {
