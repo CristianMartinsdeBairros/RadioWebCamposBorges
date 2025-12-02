@@ -32,7 +32,7 @@ public class RadioService extends Service {
         channel.setDescription("This is my notification channel");
         Notification notification = new NotificationCompat.Builder(this, channelId)
             .setContentTitle("A Rádio Web Campos Borges está ao vivo agora!")
-            .setContentText("")
+            .setContentText("Escute nossa programação pelo aplicativo!")
             .build();
         return notification;
     }
