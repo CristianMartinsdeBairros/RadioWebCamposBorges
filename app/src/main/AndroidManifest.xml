@@ -5,6 +5,17 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     
+    <!-- Required for apps targeting Android 13 (API 33) or higher to post notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Required for apps targeting Android 14 (API 34) or higher, based on service type -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_TYPE" /> 
+    
+    <!-- Example: specific permission for location service type -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
+
+    
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
