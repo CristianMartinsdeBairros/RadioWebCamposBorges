@@ -47,7 +47,6 @@ public class MainActivity extends Activity implements OnClickListener {
         
         initializeUIElements();
 
-        initializeMediaPlayer();
 
     }
 
@@ -68,9 +67,9 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public void onClick(View v) {
         if (v == buttonPlay) {
-            startPlaying();
+            startService(new Intent(MainActivity.this, RadioService.class));
         } else if (v == buttonStopPlay) {
-            stopPlaying();
+            stopService(new Intent(MainActivity.this, RadioService.class));
         }
     }
 
