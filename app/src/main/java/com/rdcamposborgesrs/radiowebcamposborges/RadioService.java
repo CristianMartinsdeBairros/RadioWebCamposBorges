@@ -22,15 +22,18 @@ public class RadioService extends Service {
     private static final int NOTIFICATION_ID = 999999; 
     private MediaPlayer mediaPlayer;
     private String radioStreamUrl = "https://azuracast.rdcamposborgesrs.com.br/listen/radio_web_campos_borges_88.5_fm/movel.mp3"; // Substitua pela URL rea
-        private Notification createNotification() {
+    String channelId = "rdcamposborgesrs";
+    String channelName = "Rádio Web Campos Borges";
+    
+    private Notification createNotification() {
         // Create a notification channel for Android O (API 26) and above
         // ... (code for creating channel in Application class or here)
-        String channelId = "1";
-        String channelName = "Rádio";
         int importance = NotificationManager.IMPORTANCE_HIGH; // High priority notifications
         NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
         channel.setDescription("This is my notification channel");
-        Notification notification = new NotificationCompat.Builder(this, channelId)
+        notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+        Notification notification = new NotificationCompat.Builder(this, channel)
             .setContentTitle("A Rádio Web Campos Borges está ao vivo agora!")
             .setContentText("Escute nossa programação pelo aplicativo!")
             .build();
