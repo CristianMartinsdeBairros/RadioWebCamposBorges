@@ -7,6 +7,9 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import java.io.IOException;
+import android.content.Context;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 
 public class RadioService extends Service {
 
@@ -17,6 +20,9 @@ public class RadioService extends Service {
         // Iniciar reprodução
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotSleep");
+        wakeLock.acquire();
             try {
                 mediaPlayer.setDataSource(radioStreamUrl);
                 mediaPlayer.prepareAsync(); // Assíncrono para não bloquear a thread principal
