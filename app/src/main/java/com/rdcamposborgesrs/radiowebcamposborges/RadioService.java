@@ -20,9 +20,6 @@ public class RadioService extends Service {
         // Iniciar reprodução
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
-            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotSleep");
-        wakeLock.acquire();
             try {
                 mediaPlayer.setDataSource(radioStreamUrl);
                 mediaPlayer.prepareAsync(); // Assíncrono para não bloquear a thread principal
