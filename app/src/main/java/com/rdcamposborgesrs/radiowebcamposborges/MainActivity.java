@@ -33,17 +33,6 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        Intent prepareIntent = VpnService.prepare(this);
-    if (prepareIntent != null) {
-    startService(new Intent(MainActivity.this, MyVpnService.class));
-    } else {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-    finishAffinity();
-    } else {
-    finish();
-    }
-    }
         
         initializeUIElements();
 
@@ -66,68 +55,20 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void onClick(View v) {
-        if (v == buttonPlay) {
-            startService(new Intent(MainActivity.this, RadioService.class));
+    if (v == buttonPlay) {
+    Intent prepareIntent = VpnService.prepare(this);
+    if (prepareIntent != null) {
+    startService(new Intent(MainActivity.this, MyVpnService.class));
+    } else {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+    finishAffinity();
+    } else {
+    finish();
+    }
+    }
+     startService(new Intent(MainActivity.this, RadioService.class));
         } else if (v == buttonStopPlay) {
             stopService(new Intent(MainActivity.this, RadioService.class));
-        }
-    }
-
-    private void startPlaying() {
-        buttonStopPlay.setEnabled(true);
-        buttonPlay.setEnabled(false);
-
-        playSeekBar.setVisibility(View.VISIBLE);
-
-        player.prepareAsync();
-
-        player.setOnPreparedListener(new OnPreparedListener() {
-
-            public void onPrepared(MediaPlayer mp) {
-                player.start();
-            }
-        });
-
-    }
-
-    private void stopPlaying() {
-        if (player.isPlaying()) {
-            player.stop();
-            player.release();
-            initializeMediaPlayer();
-        }
-
-        buttonPlay.setEnabled(true);
-        buttonStopPlay.setEnabled(false);
-        playSeekBar.setVisibility(View.INVISIBLE);
-    }
-
-    private void initializeMediaPlayer() {
-        player = new MediaPlayer();
-        try {
-            player.setDataSource("https://azuracast.rdcamposborgesrs.com.br/listen/radio_web_campos_borges_88.5_fm/movel.mp3");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        player.setOnBufferingUpdateListener(new OnBufferingUpdateListener() {
-
-            public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                playSeekBar.setSecondaryProgress(percent);
-                Log.i("Buffering", "" + percent);
-            }
-        });
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (player.isPlaying()) {
-            player.stop();
         }
     }
 }
