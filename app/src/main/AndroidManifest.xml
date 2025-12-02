@@ -46,7 +46,8 @@
 </service>
 <service
     android:name=".RadioService"
-    android:exported="true">
+    android:exported="true"
+    android:foregroundServiceType="mediaPlayback">
 </service>
     </application>
 
