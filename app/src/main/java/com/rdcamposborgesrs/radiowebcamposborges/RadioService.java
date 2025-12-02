@@ -1,5 +1,9 @@
 package com.rdcamposborgesrs.radiowebcamposborges;
 // Dentro do seu Service
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
+import android.media.MediaPlayer.OnPreparedListener;
+import android.app.Service;
 public class RadioService extends Service {
 
     private MediaPlayer mediaPlayer;
