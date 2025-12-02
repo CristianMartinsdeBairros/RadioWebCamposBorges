@@ -11,11 +11,6 @@
     <!-- Required for apps targeting Android 14 (API 34) or higher, based on service type -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_TYPE" /> 
     
-    <!-- Example: specific permission for location service type -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
-
-    
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
