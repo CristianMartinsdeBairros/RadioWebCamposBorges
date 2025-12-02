@@ -29,9 +29,8 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
+    
         initializeUIElements();
-
 
     }
 
@@ -57,9 +56,11 @@ public class MainActivity extends Activity implements OnClickListener {
     finish();
     }
     }
-     startService(new Intent(MainActivity.this, RadioService.class));
+        Context context = getApplicationContext();
+        Intent intent = new Intent(MainActivity.this, RadioService.class);
+        context.startForegroundService(intent);
         } else if (v == buttonStopPlay) {
-            stopService(new Intent(MainActivity.this, RadioService.class));
+        stopService(new Intent(MainActivity.this, RadioService.class));
         }
     }
 }
