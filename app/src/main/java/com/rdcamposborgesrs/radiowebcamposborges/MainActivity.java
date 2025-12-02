@@ -20,13 +20,9 @@ import android.widget.ProgressBar;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-    private ProgressBar playSeekBar;
-
     private Button buttonPlay;
 
     private Button buttonStopPlay;
-
-    private MediaPlayer player;
 
     /** Called when the activity is first created. */
     @Override
@@ -40,10 +36,6 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     private void initializeUIElements() {
-
-        playSeekBar = (ProgressBar) findViewById(R.id.progressBar1);
-        playSeekBar.setMax(100);
-        playSeekBar.setVisibility(View.INVISIBLE);
 
         buttonPlay = (Button) findViewById(R.id.buttonPlay);
         buttonPlay.setOnClickListener(this);
