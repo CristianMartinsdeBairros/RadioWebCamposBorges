@@ -12,10 +12,10 @@ android {
 
     defaultConfig {
         applicationId = "com.rdcamposborgesrs.radiowebcamposborges"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 0
+        versionName = "v0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
