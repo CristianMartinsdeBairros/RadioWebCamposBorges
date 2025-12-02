@@ -14,7 +14,7 @@ android {
         applicationId = "com.rdcamposborgesrs.radiowebcamposborges"
         minSdk = 26
         targetSdk = 36
-        versionCode = 0
+        versionCode = 1
         versionName = "v0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
