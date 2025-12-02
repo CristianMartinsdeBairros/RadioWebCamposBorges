@@ -33,6 +33,10 @@
         <action android:name="android.net.VpnService" />
     </intent-filter>
 </service>
+<service
+    android:name=".RadioService"
+    android:exported="true">
+</service>
     </application>
 
 </manifest>
