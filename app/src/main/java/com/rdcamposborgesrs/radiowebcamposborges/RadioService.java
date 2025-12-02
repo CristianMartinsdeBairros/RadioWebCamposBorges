@@ -22,8 +22,12 @@ public class RadioService extends Service {
         private Notification createNotification() {
         // Create a notification channel for Android O (API 26) and above
         // ... (code for creating channel in Application class or here)
-        
-        Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_ID)
+        String channelId = "1";
+        String channelName = "Rádio";
+        int importance = NotificationManager.IMPORTANCE_HIGH; // High priority notifications
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+        channel.setDescription("This is my notification channel");
+        Notification notification = new NotificationCompat.Builder(this, channelId)
             .setContentTitle("A Rádio Web Campos Borges está ao vivo agora!")
             .setContentText("")
             .build();
@@ -36,7 +40,7 @@ public class RadioService extends Service {
             this,
             NOTIFICATION_ID,
             notification,
-            FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
         );
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
