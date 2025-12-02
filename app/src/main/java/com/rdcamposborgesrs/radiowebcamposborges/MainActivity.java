@@ -49,7 +49,6 @@ public class MainActivity extends Activity implements OnClickListener {
         buttonPlay.setOnClickListener(this);
 
         buttonStopPlay = (Button) findViewById(R.id.buttonStopPlay);
-        buttonStopPlay.setEnabled(false);
         buttonStopPlay.setOnClickListener(this);
 
     }
