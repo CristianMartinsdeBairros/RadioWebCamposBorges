@@ -30,7 +30,7 @@ public class RadioService extends Service {
         // ... (code for creating channel in Application class or here)
         int importance = NotificationManager.IMPORTANCE_HIGH; // High priority notifications
         NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
-        channel.setDescription("This is my notification channel");
+        channel.setDescription("Notificações da Rádio");
         NotificationManager nm = getSystemService(NotificationManager.class);
         nm.createNotificationChannel(channel);
         Notification notification = new NotificationCompat.Builder(this, "rdcamposborgesrs")
