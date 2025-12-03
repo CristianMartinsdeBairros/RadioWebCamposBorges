@@ -31,9 +31,8 @@ public class RadioService extends Service {
         int importance = NotificationManager.IMPORTANCE_HIGH; // High priority notifications
         NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
         channel.setDescription("This is my notification channel");
-        notificationManager = getSystemService(NotificationManager.class);
-        notificationManager.createNotificationChannel(channel);
-        Notification notification = new NotificationCompat.Builder(this, channel)
+        NotificationManager.createNotificationChannel(channel);
+        Notification notification = new NotificationCompat.Builder(this, channelId)
             .setContentTitle("A Rádio Web Campos Borges está ao vivo agora!")
             .setContentText("Escute nossa programação pelo aplicativo!")
             .build();
