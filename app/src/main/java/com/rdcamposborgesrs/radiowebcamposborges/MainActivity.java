@@ -47,7 +47,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public void onClick(View v) {
     if (v == buttonPlay) {
-    startService(new Intent(MainActivity.this, MyVpnService.class));
     Context context = getApplicationContext();
     Intent intent = new Intent(MainActivity.this, RadioService.class);
     context.startForegroundService(intent);
