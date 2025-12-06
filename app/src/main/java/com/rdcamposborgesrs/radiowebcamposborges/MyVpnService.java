@@ -1,64 +1,60 @@
 package com.rdcamposborgesrs.radiowebcamposborges;
 
-import android.content.Intent;
 import android.net.VpnService;
-import android.os.ParcelFileDescriptor;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
+import android.content.Intent;
+import android.app.PendingIntent;
 
-public class MyVpnService extends VpnService implements Runnable {
-
-    private ParcelFileDescriptor mInterface;
-    private Thread mThread;
+public class MyVpnService extends VpnService {
+    private FileDescriptor vpnInterface;
+    private Thread vpnThread;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (mThread == null) {
-            mThread = new Thread(this, "MyVpnThread");
-            mThread.start();
-        }
+        // Ask for user permission if needed (handled in the activity that starts this service)
+
+        // Start a new thread for VPN operations to avoid blocking the main thread
+        vpnThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Configure a new interface from our VpnService instance
+                    VpnService.Builder builder = new VpnService.Builder();
+
+                    // Create a local TUN interface using predetermined addresses/routes
+                    builder.addAddress("10.0.2.15", 32); // Assign an IP to the VPN interface
+                    builder.addRoute("0.0.0.0", 0);     // Route all traffic through the VPN
+
+                    // *** Set the DNS server ***
+                    builder.addDnsServer("1.1.1.1");
+
+                    // Protect the tunnel socket to prevent routing loops (if you are connecting to a remote server)
+                    // You would need to create your tunnel socket first (e.g., a DatagramSocket)
+                    // builder.protect(tunnelSocket);
+
+                    // Establish the VPN interface
+                    vpnInterface = builder.establish().getFileDescriptor();
+
+                    // After this, you need a loop to read/write packets from the vpnInterface
+                    // and tunnel them to your remote VPN server (the protocol implementation is up to you)
+
+                } catch (Exception e) {
+                    // Handle exception
+                    e.printStackTrace();
+                }
+            }
+        });
+        vpnThread.start();
         return START_STICKY;
     }
 
+    // Override onRevoke() and onDestroy() to clean up resources
     @Override
-    public void run() {
-        try {
-            // Establish the VPN connection
-            establishVpnConnection();
-            // Code to read/write packets goes here
-            // e.g., using FileInputStream and FileOutputStream on mInterface.getFileDescriptor()
-        } catch (Exception e) {
-            // Handle exceptions
-        } finally {
-            // Close the interface when done
-            try {
-                if (mInterface != null) {
-                    mInterface.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public void onRevoke() {
+        super.onRevoke();
+        // Close the file descriptor and shut down the tunnel gracefully
     }
-
-    private void establishVpnConnection() {
-        Builder builder = new Builder();
-        // Configure the VPN parameters
-        builder.setSession(getString(R.string.app_name))
-               .addAddress("31.97.162.141", 24) // Assign an IP address to the virtual interface
-               .addDnsServer("1.1.1.1")    // Set a DNS server
-               .addRoute("0.0.0.0", 0)     // Route all traffic through the VPN
-               .setMtu(1500);
-
-        // Establish the interface and get the file descriptor
-        mInterface = builder.establish();
-        if (mInterface == null) {
-            // Permission not granted or other issue
-            return;
-        }
-        
-        // Use mInterface.getFileDescriptor() to set up your tunnel (e.g., with a remote server)
-    }
-
-    // Need to add onRevoke() and onDestroy() methods to handle the VPN lifecycle
 }
