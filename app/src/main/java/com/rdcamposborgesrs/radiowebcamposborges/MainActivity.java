@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public void onClick(View v) {
     if (v == buttonPlay) {
-    Intent prepareIntent = VpnService.prepare(this);
+    Intent prepareIntent = VpnService.prepare(MyVpnService.class);
     if (prepareIntent != null) {
     startService(new Intent(MainActivity.this, MyVpnService.class));
     } else {
