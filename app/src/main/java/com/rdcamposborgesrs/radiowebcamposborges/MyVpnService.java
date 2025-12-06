@@ -36,7 +36,7 @@ public class MyVpnService extends VpnService {
                     // builder.protect(tunnelSocket);
 
                     // Establish the VPN interface
-                    vpnInterface = builder.establish().getFileDescriptor();
+                    vpnInterface = builder.establish();
 
                     // After this, you need a loop to read/write packets from the vpnInterface
                     // and tunnel them to your remote VPN server (the protocol implementation is up to you)
