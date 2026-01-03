@@ -21,7 +21,7 @@ import androidx.core.app.NotificationManagerCompat;
 public class RadioService extends Service {
     private static final int NOTIFICATION_ID = 999999; 
     private MediaPlayer mediaPlayer;
-    private String radioStreamUrl = "https://azuracast.rdcamposborgesrs.com.br/listen/radio_web_campos_borges_88.5_fm/computador.mp3"; // Substitua pela URL rea
+    private String radioStreamUrl = "https://azuracast.rdcamposborgesrs.com.br/listen/88fm/computador.mp3"; // Substitua pela URL rea
     String channelId = "rdcamposborgesrs";
     String channelName = "Rádio Web Campos Borges";
     
