@@ -52,7 +52,7 @@ public class RadioService extends Service {
             mediaPlayer = new MediaPlayer();
             try {
                 mediaPlayer.setDataSource(radioStreamUrl);
-                mediaPlayer.prepareAsync(); // Assíncrono para não bloquear a thread principal
+                mediaPlayer.prepare(); // Assíncrono para não bloquear a thread principal
 
                 mediaPlayer.setOnPreparedListener(mp -> mp.start());
                 mediaPlayer.setOnErrorListener((mp, what, extra) -> {
