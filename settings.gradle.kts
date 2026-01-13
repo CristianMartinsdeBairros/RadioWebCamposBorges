@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Radio Web Campos Borges 89.9 FM"
+rootProject.name = "Radio Web Campos Borges 88.5 FM"
 include(":app")
